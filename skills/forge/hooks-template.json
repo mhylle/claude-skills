@@ -1,0 +1,81 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/skills/forge/scripts/stop-hook-hard.js",
+            "timeout": 120
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "prompt",
+            "prompt": "Check if there is a .forge/workflow.json file in the project directory. If it exists and the current phase has soft enforcement (discover, specify, or design), evaluate whether the phase Definition of Done has been met based on your work so far. If DoD is not fully met: list the incomplete items and either continue working to complete them, or if you have good reason to stop early, note your justification. If no .forge/workflow.json exists or the phase is hard-enforcement, take no action.",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/skills/forge/scripts/session-start-hook.js",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/skills/forge/scripts/pre-tool-hook.js",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/skills/forge/scripts/post-tool-hook.js",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/skills/forge/scripts/user-prompt-hook.js",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ~/.claude/skills/forge/scripts/pre-compact-hook.js",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
