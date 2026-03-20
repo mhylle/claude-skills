@@ -7,20 +7,20 @@
 
 ## Installation
 
-1. Copy the `forge/` directory to `~/.claude/skills/forge/`
-2. Copy the agent files to `~/.claude/agents/`:
-   - `forge-recovery.md`
-   - `forge-verifier.md`
-   - `forge-researcher.md`
-   - `forge-reviewer.md`
-3. Register hooks:
-   ```bash
-   node ~/.claude/skills/forge/scripts/register-hooks.js
-   ```
+### As a Plugin (recommended)
 
-This merges Forge hooks into your existing `~/.claude/hooks.json` without overwriting anything. A backup is created automatically.
+1. Add the marketplace: `/plugin marketplace add mhylle/claude-skills`
+2. Install the forge plugin: `/plugin install forge@claude-skills`
+3. Choose scope: `user` (all projects) or `project` (this project only)
 
-To unregister: `node ~/.claude/skills/forge/scripts/register-hooks.js --unregister`
+All skills, agents, and hooks are registered automatically.
+
+### Manual Installation
+
+1. Clone the repo and run `./install.sh`
+2. This copies skills to `~/.claude/skills/forge/`, agents to `~/.claude/agents/`, and registers hooks
+
+To uninstall the plugin: `/plugin` > manage > remove forge
 
 ## Quick Start
 

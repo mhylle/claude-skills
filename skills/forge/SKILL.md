@@ -122,7 +122,7 @@ Display and optionally edit the project configuration.
 
 Validate `.forge/` state for cross-machine consistency. Run this after pulling from git on a different machine.
 
-1. Run: `node ~/.claude/skills/forge/scripts/sync-check.js`
+1. Find and run the sync-check script from the forge skill's `scripts/sync-check.js`
 2. Report the results to the user
 3. If issues are found, suggest fixes
 

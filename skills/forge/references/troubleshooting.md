@@ -4,14 +4,11 @@
 
 **Symptom**: Forge doesn't block on Stop, doesn't inject context on SessionStart.
 
-**Cause**: Hooks not registered in `~/.claude/hooks.json`.
+**Cause**: Plugin not enabled or hooks not loaded.
 
 **Fix**:
-```bash
-node ~/.claude/skills/forge/scripts/register-hooks.js
-```
-
-Verify: Check `~/.claude/hooks.json` contains entries with `forge/scripts/` paths.
+- If installed as plugin: `/plugin` > ensure forge is enabled, then `/reload-plugins`
+- If installed manually: run `node ~/.claude/skills/forge/scripts/register-hooks.js`
 
 ## Stop hook infinite loop
 
@@ -54,17 +51,17 @@ Verify: Check `~/.claude/hooks.json` contains entries with `forge/scripts/` path
 **Cause**: Hook scripts are taking too long (test suite too slow, etc.).
 
 **Fix**:
-- Check timeout values in hooks-template.json (default: 120s for Stop, 5-10s for others)
+- The Stop hook has a 120s timeout, other hooks 5-10s
 - If your test suite is slow, consider configuring a faster subset for DoD checks
 - The Stop hook runs your full test/lint/build commands - ensure they're not doing unnecessary work
 
 ## Coexistence with existing hooks
 
-**Symptom**: Other hooks (prettier, TypeScript check, etc.) stopped working after Forge registration.
+**Symptom**: Other hooks (prettier, TypeScript check, etc.) stopped working after Forge installation.
 
-**Cause**: Should not happen - Forge appends, never replaces.
+**Cause**: Should not happen - plugin hooks are additive and namespaced.
 
 **Fix**:
-1. Check `~/.claude/hooks.json` - existing hooks should still be there
-2. Restore from backup: `cp ~/.claude/hooks.json.backup ~/.claude/hooks.json`
-3. Re-register: `node ~/.claude/skills/forge/scripts/register-hooks.js`
+1. Check that the forge plugin is listed in `/plugin` and enabled
+2. Run `/reload-plugins` to re-initialize all plugins
+3. If using manual installation, check `~/.claude/hooks.json` for conflicts

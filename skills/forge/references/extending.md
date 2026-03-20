@@ -47,11 +47,11 @@ To focus on what matters for your project:
 }
 ```
 
-To add a custom dimension, modify the `forge-reviewer` agent at `~/.claude/agents/forge-reviewer.md`. Add a new section to the dimension checklists with your custom criteria.
+To add a custom dimension, modify the `forge-reviewer` agent. If installed as a plugin, the agent lives inside the plugin's `agents/` directory. Add a new section to the dimension checklists with your custom criteria.
 
 ## Modifying Phase Skills
 
-Phase skills live at `~/.claude/skills/forge/skills/{phase}.md`. Each follows the same structure:
+Phase skills live in the forge skill's `skills/{phase}.md` directory. Each follows the same structure:
 
 1. **Definition of Ready** - What must exist before starting
 2. **Steps** - Ordered work items
@@ -62,7 +62,7 @@ To customize a phase, edit its skill file. For example, to add a mandatory archi
 
 ## Modifying Artifact Templates
 
-Templates live at `~/.claude/skills/forge/references/{name}-template.md`. Phase skills reference these when producing artifacts. Edit them to match your project's conventions.
+Templates live in the forge skill's `references/{name}-template.md` directory. Phase skills reference these when producing artifacts. Edit them to match your project's conventions.
 
 ## Adding a Custom Phase
 
@@ -77,7 +77,7 @@ To add a phase (e.g., "deploy" after ship):
 1. Add the phase name to `PHASE_ORDER` in `scripts/lib/state.js`
 2. Add its DoD criteria to `PHASE_DOD` in the same file
 3. Add its enforcement level default to `DEFAULTS.enforcement` in `scripts/lib/config.js`
-4. Create a phase skill at `~/.claude/skills/forge/skills/{phase}.md`
+4. Create a phase skill at `skills/forge/skills/{phase}.md`
 5. Add hard DoD evaluation logic to `scripts/lib/enforcement.js` if the phase is hard-enforced
 6. Update the orchestrator skill at `SKILL.md` to reference the new phase
 
@@ -90,7 +90,7 @@ The Stop hook has two components:
 
 ## Creating Custom Agents
 
-Forge agents live at `~/.claude/agents/forge-{name}.md`. Create new specialists following the same format:
+Forge agents live in the plugin's `agents/` directory. Create new specialists following the same format:
 
 ```markdown
 ---
@@ -117,7 +117,7 @@ Reference your custom agent from phase skills by instructing Claude to spawn it 
 
 ## Modifying Hook Scripts
 
-All hook scripts are Node.js files in `~/.claude/skills/forge/scripts/`. They follow a common pattern:
+All hook scripts are Node.js files in the forge skill's `scripts/` directory. They follow a common pattern:
 
 1. Read stdin (JSON from Claude Code)
 2. Find `.forge/` directory
@@ -148,12 +148,13 @@ if [ ! -f ".forge/artifacts/REVIEW.md" ]; then
 fi
 ```
 
-## Uninstalling Forge Hooks
+## Uninstalling Forge
 
-To remove Forge hooks without affecting other hooks:
+If installed as a plugin: `/plugin` > manage > remove forge
 
+If installed manually:
 ```bash
 node ~/.claude/skills/forge/scripts/register-hooks.js --unregister
+rm -rf ~/.claude/skills/forge
+rm ~/.claude/agents/forge-*.md
 ```
-
-This removes only hooks containing `forge/scripts/` paths. Your existing hooks remain untouched.

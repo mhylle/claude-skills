@@ -20,15 +20,29 @@ Forge inverts this: **hooks enforce, skills guide**. The Stop hook blocks Claude
 - **Parallel code review**: Multi-dimension review agents (functionality, security, performance, test quality, maintainability)
 - **Project detection**: Auto-detects Node.js, Python, Go, Rust, .NET and suggests config
 
-## Quick Start
+## Installation
+
+### As a Plugin (recommended)
+
+In Claude Code:
+```
+/plugin marketplace add mhylle/claude-skills
+/plugin install forge@claude-skills
+```
+
+All skills, agents, and hooks are registered automatically.
+
+### Manual Installation
 
 ```bash
-git clone <this-repo>
+git clone https://github.com/mhylle/claude-skills.git
 cd claude-skills
 ./install.sh
 ```
 
-Then in any project:
+## Quick Start
+
+In any project:
 
 ```
 /forge init          # Detect project type, create .forge/config.json

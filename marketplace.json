@@ -1,0 +1,9 @@
+{
+  "name": "claude-skills",
+  "description": "Forge and other Claude Code skills by Martin Hylleberg",
+  "plugins": {
+    "forge": {
+      "path": "."
+    }
+  }
+}
