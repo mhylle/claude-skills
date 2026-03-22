@@ -26,6 +26,15 @@
         "hooks": [
           {
             "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/forge/scripts/setup-personal-skill.js\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
             "command": "node \"${CLAUDE_PLUGIN_ROOT}/skills/forge/scripts/session-start-hook.js\"",
             "timeout": 10
           }
