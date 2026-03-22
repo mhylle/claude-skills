@@ -1,6 +1,6 @@
 {
   "name": "forge",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Hook-enforced development workflow framework. Provides a 6-phase SDLC (Discover, Specify, Design, Implement, Review, Ship) enforced by Claude Code hooks. Use this plugin whenever you need structured, enforced development workflows with adaptive enforcement, automated recovery, and cross-machine state persistence. Triggers on /forge commands (init, start, status, continue, skip-to, fix, incident, history, sync-check, config, reset).",
   "author": {
     "name": "Martin Hylleberg",

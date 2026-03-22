@@ -53,7 +53,7 @@ Start a new workflow. Default phase is `discover`.
 2. Ask the user for a title/description of what they're working on.
 3. Create `workflow.json` using the state library. See [workflow-schema.md](references/workflow-schema.md) for the schema.
 4. Display the workflow status.
-5. Load the appropriate phase skill from `skills/{phase}.md` and begin working.
+5. Load the appropriate phase skill from `phases/{phase}.md` and begin working.
 
 Valid phases: `discover`, `specify`, `design`, `implement`, `review`, `ship`.
 
@@ -73,7 +73,7 @@ If no active workflow, say so and suggest `/forge start` or `/forge init`.
 Resume where you left off.
 
 1. Read `.forge/workflow.json` and display status (same as `/forge status`)
-2. Load the current phase skill from `skills/{phase}.md`
+2. Load the current phase skill from `phases/{phase}.md`
 3. Continue working from the current step
 
 ### `/forge skip-to <phase>`
@@ -141,19 +141,19 @@ Reset the current workflow.
 When a phase completes (DoD met, Stop hook allows), the workflow automatically advances to the next non-skipped phase. You will see this in the session via the Stop hook output. When entering a new phase:
 
 1. Read the updated `workflow.json`
-2. Load the new phase skill from `skills/{phase}.md`
+2. Load the new phase skill from `phases/{phase}.md`
 3. Begin the new phase's work
 
 ## Phase Skills
 
-Each phase has a dedicated skill in `skills/`:
+Each phase has a dedicated skill in `phases/`:
 
-- `skills/discover.md` - Research, explore, frame the problem
-- `skills/specify.md` - Write requirements and acceptance criteria
-- `skills/design.md` - Plan architecture, write ADRs
-- `skills/implement.md` - Build against the plan, write tests
-- `skills/review.md` - Multi-dimension code review
-- `skills/ship.md` - Commit, PR, deploy
+- `phases/discover.md` - Research, explore, frame the problem
+- `phases/specify.md` - Write requirements and acceptance criteria
+- `phases/design.md` - Plan architecture, write ADRs
+- `phases/implement.md` - Build against the plan, write tests
+- `phases/review.md` - Multi-dimension code review
+- `phases/ship.md` - Commit, PR, deploy
 
 Load the relevant skill when entering a phase. The phase skill contains the DoR (entry gate), steps, DoD (exit gate), and artifact template for that phase.
 
