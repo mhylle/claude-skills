@@ -9,7 +9,7 @@
     {
       "name": "forge",
       "description": "Hook-enforced development workflow framework with 6-phase SDLC",
-      "source": "."
+      "source": "./plugins/forge"
     }
   ]
 }
