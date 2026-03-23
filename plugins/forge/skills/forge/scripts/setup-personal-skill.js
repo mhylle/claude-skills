@@ -6,7 +6,8 @@
  * from ~/.claude/skills/<name> -> the plugin's skill directory.
  * This makes skills available without the plugin namespace prefix.
  *
- * Runs on SessionStart. Idempotent - skips skills already set up.
+ * Runs on SessionStart. Re-links if the target has changed (e.g. after
+ * a plugin version update that changes the cache path).
  */
 
 const fs = require('fs');
@@ -40,10 +41,25 @@ function main() {
       continue;
     }
 
-    // Already set up - check if symlink/dir exists and has SKILL.md
+    // Check existing link/dir
     try {
       const stat = fs.lstatSync(personalDir);
-      if (stat.isSymbolicLink() || stat.isDirectory()) {
+
+      if (stat.isSymbolicLink()) {
+        // Symlink exists - check if it points to the right place
+        const target = fs.readlinkSync(personalDir);
+        const resolvedTarget = path.resolve(path.dirname(personalDir), target);
+        const resolvedPlugin = path.resolve(pluginDir);
+
+        if (resolvedTarget === resolvedPlugin) {
+          // Already pointing to the right place
+          continue;
+        }
+
+        // Stale symlink - remove it and re-create
+        fs.unlinkSync(personalDir);
+      } else if (stat.isDirectory()) {
+        // Real directory (from copy fallback) - check if SKILL.md exists
         if (fs.existsSync(path.join(personalDir, 'SKILL.md'))) {
           continue;
         }
