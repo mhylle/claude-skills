@@ -18,7 +18,7 @@ const { getConfig } = require(path.join(libDir, 'config'));
 function main() {
   let input = '';
   try {
-    input = fs.readFileSync('/dev/stdin', 'utf8');
+    input = fs.readFileSync(0, 'utf8');
   } catch {
     process.exit(0);
   }

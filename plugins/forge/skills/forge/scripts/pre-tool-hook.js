@@ -20,7 +20,7 @@ const { findForgeDir, getWorkflow } = require(path.join(libDir, 'state'));
 function main() {
   let input = '';
   try {
-    input = fs.readFileSync('/dev/stdin', 'utf8');
+    input = fs.readFileSync(0, 'utf8');
   } catch {
     process.exit(0);
   }

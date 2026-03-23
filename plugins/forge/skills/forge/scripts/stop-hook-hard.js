@@ -21,7 +21,7 @@ const { shouldEscalate, getEscalationContext, formatRetryMessage, formatEscalati
 function main() {
   let input = '';
   try {
-    input = require('fs').readFileSync('/dev/stdin', 'utf8');
+    input = require('fs').readFileSync(0, 'utf8');
   } catch {
     // No stdin is fine
   }

@@ -1,5 +1,4 @@
 {
-  "description": "Forge workflow enforcement hooks. Provides adaptive enforcement across 6 SDLC phases with automated recovery and escalation.",
   "hooks": {
     "Stop": [
       {
